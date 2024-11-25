@@ -6,7 +6,7 @@
 /*   By: aijadid <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 22:03:40 by aijadid           #+#    #+#             */
-/*   Updated: 2024/11/24 23:16:01 by aijadid          ###   ########.fr       */
+/*   Updated: 2024/11/25 17:50:11 by aijadid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	i;
 
 	i = 0;
-//	printf("\\\\\\\\\\\\ s1 in strjoin is : %s\n", s1);
 	if (!s1)
 		return (ft_substr(s2, 0, ft_strlen(s2)));
 	t = ft_strlen(s1) + ft_strlen(s2) + 1;
@@ -109,8 +108,6 @@ int  newline(char *str)
         int i;
 
         i = 0;
-  //      if (str[i] == '\n')
-           //     return 1;
 	if (!str)
 		return (-1);
         while (str[i])
@@ -150,30 +147,26 @@ char *get_next_line(int fd)
 	}
 	while(t)
 	{
-		buf = malloc(sizeof(char) * BUFFERSIZE);
-       		if(!buf)
-       		         return (0);	
-		r = read(fd, buf, BUFFERSIZE);
-		if(r == 0)
-			break;
-		buf[r] = '\0';
-		store = ft_strjoin(store, buf);
-//		printf("but is it storing tho : '%s'\n", store);
-		free(buf);
 		i = newline(store);
                 if (i >= 0)
                 {
 
                         tmp = ft_substr(store, i + 1, ft_strlen(store) - i);
-//						printf("000  '%s' 000\n", tmp);
-						store = gnlre(store);
+                                                store = gnlre(store);
                         break ;
                 }
-
+		buf = malloc(sizeof(char) * BUFFERSIZE);
+       		if(!buf)
+       		         return (0);	
+		r = read(fd, buf, BUFFERSIZE);
+		if(r < 1)
+		{
+			return NULL;
+		}
+		buf[r] = '\0';
+		store = ft_strjoin(store, buf);
+		free(buf);
 	}
-//	if(r % BUFFERSIZE != 0)
-//		*tmp = 0;
-//	printf("temp before exit is : %s\n", tmp);
 	return (store);
 }
 
@@ -184,10 +177,11 @@ int main()
 	int i = 0;
 
 	fd = open ("readthis.txt", O_CREAT | O_RDWR, 777);
-	while(i < 20)
+	while(i < 12)
 	{
 		b = get_next_line(fd);
-		printf("\nthe line supposed to be gtten : ****  '%s'    ****\n", b);
+		if (b)
+			printf("\nnew line ladies and gents -->  ''%s''   \n", b);
 		free(b);
 		i++;
 	}
