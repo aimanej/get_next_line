@@ -6,7 +6,7 @@
 /*   By: aijadid <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 22:03:40 by aijadid           #+#    #+#             */
-/*   Updated: 2024/11/25 17:50:11 by aijadid          ###   ########.fr       */
+/*   Updated: 2024/11/25 22:09:50 by aijadid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,90 +18,12 @@
 # define BUFFERSIZE 3
 #endif
 
-size_t	ft_strlen(const char *str)
-{
-	size_t	t;
+#include "get_next_line.h"
 
-	t = 0;
-	while (str[t])
-		t++;
-	return (t);
-}
-
-char	*ft_strdup(const char *s)
-{
-	char	*str;
-	int		t;
-	int		i;
-
-	i = 0;
-	t = ft_strlen(s);
-	str = malloc(t + 1);
-	if (!str)
-		return (NULL);
-	while (s[i])
-	{
-		str[i] = s[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
-}
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	char		*ret;
-	size_t		i;
-
-	i = 0;
-	if (!s)
-		return (NULL);
-	if (start > ft_strlen(s))
-		return (ft_strdup(""));
-	if (len > ft_strlen(s) - start)
-		ret = malloc(ft_strlen(s) - start + 1);
-	else
-		ret = malloc(len + 1);
-	if (!ret)
-		return (NULL);
-	while (s[start] && len > 0)
-	{
-		ret[i] = s[start];
-		start++;
-		i++;
-		len--;
-	}
-	ret[i] = '\0';
-	return (ret);
-}
-
-char	*ft_strjoin(char *s1, char *s2)
-{
-	char	*str;
-	size_t	t;
-	size_t	i;
-
-	i = 0;
-	if (!s1)
-		return (ft_substr(s2, 0, ft_strlen(s2)));
-	t = ft_strlen(s1) + ft_strlen(s2) + 1;
-	str = malloc(t);
-	if (!str)
-		return (NULL);
-	while (s1[i])
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	t = 0;
-	while (s2[t])
-	{
-		str[i] = s2[t];
-		i++;
-		t++;
-	}
-	str[i] = '\0';
-	return (str);
-}
+size_t  ft_strlen(const char *str);
+char    *ft_strdup(const char *s);
+char    *ft_substr(char const *s, unsigned int start,size_t len);
+char *gnlre(char *str);
 
 int  newline(char *str)
 {
