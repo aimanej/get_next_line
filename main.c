@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <fcntl.h>
 # ifndef BUFFERSIZE
-# define BUFFERSIZE 1
+# define BUFFERSIZE 3
 #endif
 
 size_t	ft_strlen(const char *str)
@@ -135,23 +135,15 @@ char *gnlre(char *str)
 char *get_next_line(int fd)
 {
 	char	*buf;
-	static char	tmp[BUFFERSIZE];
+	static char	*tmp;
 	char	*store;
 	int	i;
 	int	r;
 	int	t;
 
-	t = 9;
+	t = 1;
 	i = 0;
 	store = NULL;
-
-/*	if (!tmp)
-	{
-
-		tmp = malloc(1);
-                if(!tmp)
-                        return (NULL);
-	}*/
 	if (tmp)
 	{
 		store = ft_strdup(tmp);
@@ -159,7 +151,7 @@ char *get_next_line(int fd)
 	while(t)
 	{
 		buf = malloc(sizeof(char) * BUFFERSIZE);
-       		 if(!buf)
+       		if(!buf)
        		         return (0);	
 		r = read(fd, buf, BUFFERSIZE);
 		if(r == 0)
@@ -173,8 +165,8 @@ char *get_next_line(int fd)
                 {
 
                         tmp = ft_substr(store, i + 1, ft_strlen(store) - i);
-//			printf("000  '%s' 000\n", tmp);
-			store = gnlre(store);
+//						printf("000  '%s' 000\n", tmp);
+						store = gnlre(store);
                         break ;
                 }
 
@@ -192,7 +184,7 @@ int main()
 	int i = 0;
 
 	fd = open ("readthis.txt", O_CREAT | O_RDWR, 777);
-	while(i < 8)
+	while(i < 20)
 	{
 		b = get_next_line(fd);
 		printf("\nthe line supposed to be gtten : ****  '%s'    ****\n", b);
