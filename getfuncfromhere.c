@@ -135,7 +135,7 @@ char *gnlre(char *str)
 char *get_next_line(int fd)
 {
 	char	*buf;
-	static char	tmp[BUFFERSIZE];
+	static char	*tmp;
 	char	*store;
 	int	i;
 	int	r;
@@ -145,13 +145,6 @@ char *get_next_line(int fd)
 	i = 0;
 	store = NULL;
 
-/*	if (!tmp)
-	{
-
-		tmp = malloc(1);
-                if(!tmp)
-                        return (NULL);
-	}*/
 	if (tmp)
 	{
 		store = ft_strdup(tmp);
@@ -166,22 +159,17 @@ char *get_next_line(int fd)
 			break;
 		buf[r] = '\0';
 		store = ft_strjoin(store, buf);
-//		printf("but is it storing tho : '%s'\n", store);
 		free(buf);
 		i = newline(store);
                 if (i >= 0)
                 {
 
                         tmp = ft_substr(store, i + 1, ft_strlen(store) - i);
-//			printf("000  '%s' 000\n", tmp);
 			store = gnlre(store);
                         break ;
                 }
 
 	}
-//	if(r % BUFFERSIZE != 0)
-//		*tmp = 0;
-//	printf("temp before exit is : %s\n", tmp);
 	return (store);
 }
 

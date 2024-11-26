@@ -99,7 +99,7 @@ int main()
 	int i = 0;
 
 	fd = open ("readthis.txt", O_CREAT | O_RDWR, 777);
-	while(i < 12)
+	while(i < 20)
 	{
 		b = get_next_line(fd);
 		if (b)
