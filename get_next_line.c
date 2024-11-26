@@ -1,22 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aijadid <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 22:03:40 by aijadid           #+#    #+#             */
-/*   Updated: 2024/11/25 22:09:50 by aijadid          ###   ########.fr       */
+/*   Updated: 2024/11/26 17:14:46 by aijadid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <fcntl.h>
-# ifndef BUFFERSIZE
-# define BUFFERSIZE 3
-#endif
 
 #include "get_next_line.h"
 
@@ -72,15 +64,14 @@ char *get_next_line(int fd)
 		i = newline(store);
                 if (i >= 0)
                 {
-
-                        tmp = ft_substr(store, i + 1, ft_strlen(store) - i);
-                                                store = gnlre(store);
+			tmp = ft_substr(store, i + 1, ft_strlen(store) - i);
+			store = gnlre(store);
                         break ;
                 }
-		buf = malloc(sizeof(char) * BUFFERSIZE);
+		buf = malloc(sizeof(char) * BUFFER_SIZE);
        		if(!buf)
        		         return (0);	
-		r = read(fd, buf, BUFFERSIZE);
+		r = read(fd, buf, BUFFER_SIZE);
 		if(r < 1)
 		{
 			return NULL;
@@ -99,7 +90,7 @@ int main()
 	int i = 0;
 
 	fd = open ("readthis.txt", O_CREAT | O_RDWR, 777);
-	while(i < 20)
+	while(i < 200)
 	{
 		b = get_next_line(fd);
 		if (b)
