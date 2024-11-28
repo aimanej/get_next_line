@@ -6,7 +6,7 @@
 /*   By: aijadid <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 22:03:40 by aijadid           #+#    #+#             */
-/*   Updated: 2024/11/26 17:14:46 by aijadid          ###   ########.fr       */
+/*   Updated: 2024/11/28 06:30:59 by aijadid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int  newline(char *str)
         }
         return (-1);
 }
+/*
 char *gnlre(char *str)
 {
 	int t;
@@ -37,7 +38,7 @@ char *gnlre(char *str)
 		re = ft_substr(str, 0, t + 1);
 	return re;
 	
-}
+}*/
 char *get_next_line(int fd)
 {
 	char	*buf;
@@ -59,22 +60,21 @@ char *get_next_line(int fd)
 	while(1)
 	{
 		i = newline(store);
-        if (i >= 0)
-        {
-            tmp = ft_substr(store, i + 1, ft_strlen(store) - i);
-            line = gnlre(store);
-			free(store);
-            return line;
+    	    	if (i >= 0)
+        	{
+            		tmp = ft_substr(store, i + 1, ft_strlen(store) - i);
+           		line = ft_substr(store, 0, i + 1);
+    	    		free(store);
+            		return line;
 		}
-
-		buf = malloc(sizeof(char) * BUFFERSIZE);
-       	if(!buf)
-       		    return (0);
-
+		buf = malloc(sizeof(char) * BUFFERSIZE + 1);
+       		if(!buf)
+			return (NULL);
 		r = read(fd, buf, BUFFERSIZE);
 		if(r < 1)
 		{
 			free(buf);
+			free(store);
 			return NULL;
 		}
 		buf[r] = '\0';
@@ -83,7 +83,6 @@ char *get_next_line(int fd)
 		store = newstore;
 		free(buf);
 	}
-	return (store);
 }
 
 int main()
@@ -93,12 +92,9 @@ int main()
 	int i = 0;
 
 	fd = open ("readthis.txt", O_CREAT | O_RDWR, 777);
-	while(i < 200)
-	{
-		b = get_next_line(fd);
-		if (b)
-			printf("\nnew line ladies and gents -->  ''%s''   \n", b);
-		free(b);
-		i++;
-	}
+	while(b = get_next_line(fd))
+        {
+                printf("\nnew line ladies and gents -->  ''%s''   \n", b);
+                free(b);
+        }
 }
