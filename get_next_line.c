@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aijadid <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 22:03:40 by aijadid           #+#    #+#             */
-/*   Updated: 2024/11/25 22:09:50 by aijadid          ###   ########.fr       */
+/*   Updated: 2024/11/26 17:14:46 by aijadid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ char *get_next_line(int fd)
 	while(1)
 	{
 		i = newline(store);
+<<<<<<< HEAD
         if (i >= 0)
         {
             tmp = ft_substr(store, i + 1, ft_strlen(store) - i);
@@ -72,6 +73,18 @@ char *get_next_line(int fd)
        		    return (0);
 
 		r = read(fd, buf, BUFFERSIZE);
+=======
+                if (i >= 0)
+                {
+			tmp = ft_substr(store, i + 1, ft_strlen(store) - i);
+			store = gnlre(store);
+                        break ;
+                }
+		buf = malloc(sizeof(char) * BUFFER_SIZE);
+       		if(!buf)
+       		         return (0);	
+		r = read(fd, buf, BUFFER_SIZE);
+>>>>>>> 862c269b6409b1b577449c2b5b48746f124ad00e
 		if(r < 1)
 		{
 			free(buf);
@@ -93,7 +106,7 @@ int main()
 	int i = 0;
 
 	fd = open ("readthis.txt", O_CREAT | O_RDWR, 777);
-	while(i < 20)
+	while(i < 200)
 	{
 		b = get_next_line(fd);
 		if (b)
