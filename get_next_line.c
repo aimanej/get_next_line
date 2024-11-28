@@ -59,7 +59,6 @@ char *get_next_line(int fd)
 	while(1)
 	{
 		i = newline(store);
-<<<<<<< HEAD
         if (i >= 0)
         {
             tmp = ft_substr(store, i + 1, ft_strlen(store) - i);
@@ -73,18 +72,6 @@ char *get_next_line(int fd)
        		    return (0);
 
 		r = read(fd, buf, BUFFERSIZE);
-=======
-                if (i >= 0)
-                {
-			tmp = ft_substr(store, i + 1, ft_strlen(store) - i);
-			store = gnlre(store);
-                        break ;
-                }
-		buf = malloc(sizeof(char) * BUFFER_SIZE);
-       		if(!buf)
-       		         return (0);	
-		r = read(fd, buf, BUFFER_SIZE);
->>>>>>> 862c269b6409b1b577449c2b5b48746f124ad00e
 		if(r < 1)
 		{
 			free(buf);
