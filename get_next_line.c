@@ -39,6 +39,44 @@ char *gnlre(char *str)
 	return re;
 	
 }*/
+
+char *extract_line_tmp_update(char **store, char **tmp)
+{
+	int newindex;
+	char *line;
+
+	newindex = newline(*store);
+	if(newindex >= 0)
+	{
+		*tmp = ft_substr(*store, newindex + 1, ft_strlen(*store) - newindex);
+        line = ft_substr(*store, 0, newindex + 1);
+    	free(*store);
+		*store = NULL;
+        return line;
+	}
+	return NULL;
+}
+int read_and_store(int fd, char **buf, char **store)
+{
+	int iread;
+	char *newstore;
+
+	*buf = malloc(BUFFERSIZE + 1);
+	if(!*buf)
+		return -1;
+	iread = read(fd, *buf, BUFFERSIZE);
+	if(iread > 0)
+	{
+		(*buf)[iread] = '\0';
+		newstore = ft_strjoin(*store, *buf);
+		free(*store);
+		*store = newstore;
+	}
+	free(*buf);
+	return iread;
+
+}
+
 char *get_next_line(int fd)
 {
 	char	*buf;
@@ -46,10 +84,8 @@ char *get_next_line(int fd)
 	char	*store;
 	char *line;
 	char *newstore;
-	int	i;
 	int	r;
 
-	i = 0;
 	store = NULL;
 	if (tmp)
 	{
@@ -59,29 +95,15 @@ char *get_next_line(int fd)
 	}
 	while(1)
 	{
-		i = newline(store);
-    	    	if (i >= 0)
-        	{
-            		tmp = ft_substr(store, i + 1, ft_strlen(store) - i);
-           		line = ft_substr(store, 0, i + 1);
-    	    		free(store);
-            		return line;
-		}
-		buf = malloc(sizeof(char) * BUFFERSIZE + 1);
-       		if(!buf)
-			return (NULL);
-		r = read(fd, buf, BUFFERSIZE);
-		if(r < 1)
+		line = extract_line_tmp_update(&store, &tmp);
+		if(line)
+			return line;
+		r = read_and_store(fd, &buf, &store);
+		if (r < 1)
 		{
-			free(buf);
 			free(store);
 			return NULL;
 		}
-		buf[r] = '\0';
-		newstore = ft_strjoin(store, buf);
-		free(store);
-		store = newstore;
-		free(buf);
 	}
 }
 
