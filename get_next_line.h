@@ -13,7 +13,6 @@
 #ifndef GETNEXTLINE_H
 # define GETNEXTLINE_H
 
-<<<<<<< HEAD
 # ifndef BUFFERSIZE
 # define BUFFERSIZE 1
 #endif
@@ -22,16 +21,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <fcntl.h>
-=======
-# include <stdio.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <unistd.h>
-
-#ifndef BUFFER_SIZE
-#define BUFFER_SIZE 3
-#endif
->>>>>>> 862c269b6409b1b577449c2b5b48746f124ad00e
 
 size_t  ft_strlen(const char *str);
 char    *ft_strdup(const char *s);
