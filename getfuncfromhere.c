@@ -81,7 +81,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	i;
 
 	i = 0;
-//	printf("\\\\\\\\\\\\ s1 in strjoin is : %s\n", s1);
 	if (!s1)
 		return (ft_substr(s2, 0, ft_strlen(s2)));
 	t = ft_strlen(s1) + ft_strlen(s2) + 1;
@@ -109,8 +108,6 @@ int  newline(char *str)
         int i;
 
         i = 0;
-  //      if (str[i] == '\n')
-           //     return 1;
 	if (!str)
 		return (-1);
         while (str[i])

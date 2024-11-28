@@ -10,20 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <fcntl.h>
-# ifndef BUFFERSIZE
-# define BUFFERSIZE 3
-#endif
-
 #include "get_next_line.h"
-
-size_t  ft_strlen(const char *str);
-char    *ft_strdup(const char *s);
-char    *ft_substr(char const *s, unsigned int start,size_t len);
-char *gnlre(char *str);
 
 int  newline(char *str)
 {
@@ -56,37 +43,44 @@ char *get_next_line(int fd)
 	char	*buf;
 	static char	*tmp;
 	char	*store;
+	char *line;
+	char *newstore;
 	int	i;
 	int	r;
-	int	t;
 
-	t = 1;
 	i = 0;
 	store = NULL;
 	if (tmp)
 	{
 		store = ft_strdup(tmp);
+		free(tmp);
+		tmp = NULL;
 	}
-	while(t)
+	while(1)
 	{
 		i = newline(store);
-                if (i >= 0)
-                {
+        if (i >= 0)
+        {
+            tmp = ft_substr(store, i + 1, ft_strlen(store) - i);
+            line = gnlre(store);
+			free(store);
+            return line;
+		}
 
-                        tmp = ft_substr(store, i + 1, ft_strlen(store) - i);
-                                                store = gnlre(store);
-                        break ;
-                }
 		buf = malloc(sizeof(char) * BUFFERSIZE);
-       		if(!buf)
-       		         return (0);	
+       	if(!buf)
+       		    return (0);
+
 		r = read(fd, buf, BUFFERSIZE);
 		if(r < 1)
 		{
+			free(buf);
 			return NULL;
 		}
 		buf[r] = '\0';
-		store = ft_strjoin(store, buf);
+		newstore = ft_strjoin(store, buf);
+		free(store);
+		store = newstore;
 		free(buf);
 	}
 	return (store);
