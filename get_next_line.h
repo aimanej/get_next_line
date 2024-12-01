@@ -6,15 +6,15 @@
 /*   By: aijadid <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 20:58:43 by aijadid           #+#    #+#             */
-/*   Updated: 2024/11/26 17:05:49 by aijadid          ###   ########.fr       */
+/*   Updated: 2024/11/28 22:15:14 by aijadid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GETNEXTLINE_H
 # define GETNEXTLINE_H
 
-# ifndef BUFFERSIZE
-# define BUFFERSIZE 1
+# ifndef BUFFER_SIZE
+# define BUFFER_SIZE 1
 #endif
 
 #include <unistd.h>

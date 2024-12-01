@@ -6,7 +6,7 @@
 /*   By: aijadid <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 22:03:40 by aijadid           #+#    #+#             */
-/*   Updated: 2024/11/28 06:30:59 by aijadid          ###   ########.fr       */
+/*   Updated: 2024/12/01 22:48:52 by aijadid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,6 @@ int  newline(char *str)
         }
         return (-1);
 }
-/*
-char *gnlre(char *str)
-{
-	int t;
-	char *re;
-
-	t = newline(str);
-	if (t >= 0)	
-		re = ft_substr(str, 0, t + 1);
-	return re;
-	
-}*/
 
 char *extract_line_tmp_update(char **store, char **tmp)
 {
@@ -56,15 +44,16 @@ char *extract_line_tmp_update(char **store, char **tmp)
 	}
 	return NULL;
 }
+
 int read_and_store(int fd, char **buf, char **store)
 {
 	int iread;
 	char *newstore;
 
-	*buf = malloc(BUFFERSIZE + 1);
+	*buf = malloc(BUFFER_SIZE + 1);
 	if(!*buf)
 		return -1;
-	iread = read(fd, *buf, BUFFERSIZE);
+	iread = read(fd, *buf, BUFFER_SIZE);
 	if(iread > 0)
 	{
 		(*buf)[iread] = '\0';
@@ -73,7 +62,7 @@ int read_and_store(int fd, char **buf, char **store)
 		*store = newstore;
 	}
 	free(*buf);
-	return iread;
+	return (iread);
 
 }
 
