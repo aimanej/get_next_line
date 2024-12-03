@@ -43,8 +43,8 @@ char	*ft_strdup(const char *s)
 }
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char		*ret;
-	size_t		i;
+	char	*ret;
+	size_t	i;
 
 	i = 0;
 	if (!s)
