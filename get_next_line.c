@@ -6,7 +6,7 @@
 /*   By: aijadid <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 22:03:40 by aijadid           #+#    #+#             */
-/*   Updated: 2024/12/03 15:47:20 by aijadid          ###   ########.fr       */
+/*   Updated: 2024/12/05 20:25:58 by aijadid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ char	*get_next_line(int fd)
 	char		*line;
 	int			r;
 
+	if(fd < 0 || BUFFER_SIZE <= 0)
+		return NULL;
 	store = NULL;
 	if (tmp)
 	{
@@ -92,6 +94,13 @@ char	*get_next_line(int fd)
 		r = read_and_store(fd, &buf, &store);
 		if (r < 1)
 		{
+			if(store && *store)
+			{
+				line  = ft_strdup(store);
+				free(store);
+				store = NULL;
+				return line;
+			}
 			free(store);
 			return (NULL);
 		}
@@ -106,12 +115,12 @@ int	main(void)
 
 	i = 0;
 	fd = open("readthis.txt", O_CREAT | O_RDWR, 777);
-//	b = get_next_line(fd);
-//	printf("\nnew line ladies and gents -->  ''%s''   \n", b);
+	b = get_next_line(fd);
+	printf("\nnew line ladies and gents -->  ''%s''   \n", b);
 
-	while ((b = get_next_line(fd)) != NULL)
+/*	while ((b = get_next_line(fd)) != NULL)
 	{
 		printf("\nnew line ladies and gents -->  ''%s''   \n", b);
 		free(b);
-	}
+	}*/
 }
