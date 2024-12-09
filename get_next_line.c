@@ -6,7 +6,7 @@
 /*   By: aijadid <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 22:03:40 by aijadid           #+#    #+#             */
-/*   Updated: 2024/12/05 21:41:57 by aijadid          ###   ########.fr       */
+/*   Updated: 2024/12/09 23:18:18 by aijadid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,17 @@ int	read_and_store(int fd, char **buf, char **store)
 	free(*buf);
 	return (iread);
 }
+
+void	checker(int fd, char **tmp, char **store)
+{
+	if(*tmp)
+	{
+		*store = ft_strdup(*tmp);
+                free(*tmp);
+                *tmp = NULL;
+	}
+}
+
 char	*get_next_line(int fd)
 {
 	char		*buf;
@@ -79,12 +90,7 @@ char	*get_next_line(int fd)
 	if(fd < 0 || BUFFER_SIZE <= 0)
 		return NULL;
 	store = NULL;
-	if (tmp)
-	{
-		store = ft_strdup(tmp);
-		free(tmp);
-		tmp = NULL;
-	}
+	checker(fd, &tmp, &store);
 	r = BUFFER_SIZE;
 	while (1)
 	{
@@ -95,12 +101,7 @@ char	*get_next_line(int fd)
 		if (r < 1)
 		{
 			if(store && *store)
-			{
-				line  = ft_strdup(store);
-				free(store);
-				store = NULL;
-				return line;
-			}
+				return ft_strdup(store);
 			free(store);
 			return (NULL);
 		}
