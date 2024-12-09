@@ -6,12 +6,12 @@
 /*   By: aijadid <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 20:58:43 by aijadid           #+#    #+#             */
-/*   Updated: 2024/11/28 22:15:14 by aijadid          ###   ########.fr       */
+/*   Updated: 2024/12/09 23:41:49 by aijadid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GETNEXTLINE_H
-# define GETNEXTLINE_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1

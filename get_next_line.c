@@ -6,7 +6,7 @@
 /*   By: aijadid <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 22:03:40 by aijadid           #+#    #+#             */
-/*   Updated: 2024/12/09 23:18:18 by aijadid          ###   ########.fr       */
+/*   Updated: 2024/12/09 23:39:34 by aijadid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*extract_line_tmp_update(char **store, char **tmp, int r)
 		*store = NULL;
 		return (line);
 	}
-	if(r < BUFFER_SIZE && newindex < 0)
+	if (r < BUFFER_SIZE && newindex < 0)
 	{
 		return (*store);
 	}
@@ -71,11 +71,11 @@ int	read_and_store(int fd, char **buf, char **store)
 
 void	checker(int fd, char **tmp, char **store)
 {
-	if(*tmp)
+	if (*tmp)
 	{
 		*store = ft_strdup(*tmp);
-                free(*tmp);
-                *tmp = NULL;
+		free(*tmp);
+		*tmp = NULL;
 	}
 }
 
@@ -87,8 +87,8 @@ char	*get_next_line(int fd)
 	char		*line;
 	int			r;
 
-	if(fd < 0 || BUFFER_SIZE <= 0)
-		return NULL;
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
 	store = NULL;
 	checker(fd, &tmp, &store);
 	r = BUFFER_SIZE;
@@ -100,14 +100,14 @@ char	*get_next_line(int fd)
 		r = read_and_store(fd, &buf, &store);
 		if (r < 1)
 		{
-			if(store && *store)
-				return ft_strdup(store);
+			if (store && *store)
+				return (ft_strdup(store));
 			free(store);
 			return (NULL);
 		}
 	}
 }
-
+/*
 int	main(void)
 {
 	int		fd;
@@ -120,13 +120,12 @@ int	main(void)
 	printf("\nnew line ladies and gents -->  ''%s''   \n", b);
 	free(b);
 	b = get_next_line(fd);
-        printf("\nnew line ladies and gents -->  ''%s''   \n", b);
-        free(b);
+	printf("\nnew line ladies and gents -->  ''%s''   \n", b);
+	free(b);
 
-/*
-	while ((b = get_next_line(fd)) != NULL)
-	{
-		printf("\nnew line ladies and gents -->  ''%s''   \n", b);
-		free(b);
-	}*/
-}
+		while ((b = get_next_line(fd)) != NULL)
+		{
+			printf("\nnew line ladies and gents -->  ''%s''   \n", b);
+			free(b);
+		}
+}*/

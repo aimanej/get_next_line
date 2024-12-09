@@ -6,7 +6,7 @@
 /*   By: aijadid <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 22:11:26 by aijadid           #+#    #+#             */
-/*   Updated: 2024/11/28 22:11:28 by aijadid          ###   ########.fr       */
+/*   Updated: 2024/12/09 23:40:34 by aijadid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ char	*ft_strdup(const char *s)
 	str[i] = '\0';
 	return (str);
 }
+
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*ret;
