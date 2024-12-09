@@ -6,7 +6,7 @@
 /*   By: aijadid <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 22:03:40 by aijadid           #+#    #+#             */
-/*   Updated: 2024/12/05 20:25:58 by aijadid          ###   ########.fr       */
+/*   Updated: 2024/12/05 21:41:57 by aijadid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,13 @@ int	main(void)
 	fd = open("readthis.txt", O_CREAT | O_RDWR, 777);
 	b = get_next_line(fd);
 	printf("\nnew line ladies and gents -->  ''%s''   \n", b);
+	free(b);
+	b = get_next_line(fd);
+        printf("\nnew line ladies and gents -->  ''%s''   \n", b);
+        free(b);
 
-/*	while ((b = get_next_line(fd)) != NULL)
+/*
+	while ((b = get_next_line(fd)) != NULL)
 	{
 		printf("\nnew line ladies and gents -->  ''%s''   \n", b);
 		free(b);
